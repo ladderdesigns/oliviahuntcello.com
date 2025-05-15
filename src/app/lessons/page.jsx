@@ -144,13 +144,15 @@ export default function About() {
                   className="mt-8 border-t border-gray-900/10 dark:border-zinc-400"
                   name="private-lesson-inquiry"
                   data-netlify="true"
-                  netlify-honeypot="bot-field"
+                  data-netlify-honeypot="bot-field"
+                  data-netlify-recaptcha="true"
                 >
                   <input
                     type="hidden"
                     name="form-name"
                     value="private-lesson-inquiry"
                   />
+                  <input type="hidden" name="success" value="/thank-you" />
                   <div className="grid grid-cols-1 mt-8 gap-x-8 gap-y-6 sm:grid-cols-2">
                     <p class="hidden">
                       <label>

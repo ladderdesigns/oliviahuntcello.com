@@ -74,9 +74,11 @@ export default function Contact() {
           className="mx-auto mt-16 max-w-xl sm:mt-20"
           name="general-contact-inquiry"
           data-netlify="true"
-          netlify-honeypot="bot-field"
+          data-netlify-honeypot="bot-field"
+          data-netlify-recaptcha="true"
         >
           <input type="hidden" name="form-name" value="general-contact-inquiry" />
+          <input type="hidden" name="success" value="/thank-you" />
           <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
             <p class="hidden">
               <label>
