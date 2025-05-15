@@ -80,7 +80,7 @@ export default function Contact() {
           <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
             <p class="hidden">
               <label>
-                Don't fill this out if you're human: <input name="bot-field" />
+                Don&apos;t fill this out if you&apos;re human: <input name="bot-field" />
               </label>
             </p>
             <div>
