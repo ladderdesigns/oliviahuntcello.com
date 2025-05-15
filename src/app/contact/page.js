@@ -69,7 +69,7 @@ export default function Contact() {
           </p>
         </div>
         <form
-          action="/thank-you/"
+          action={process.env.NODE_ENV === 'development' ? '/api/submit' : '/thank-you.html'}
           method="POST"
           className="mx-auto mt-16 max-w-xl sm:mt-20"
           name="general-contact-inquiry"
@@ -80,7 +80,7 @@ export default function Contact() {
           <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
             <p class="hidden">
               <label>
-                Don’t fill this out if you’re human: <input name="bot-field" />
+                Don't fill this out if you're human: <input name="bot-field" />
               </label>
             </p>
             <div>

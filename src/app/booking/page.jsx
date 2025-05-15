@@ -10,9 +10,9 @@ function SocialLink({ className, href, children, icon: Icon }) {
     <li className={clsx(className, 'flex')}>
       <Link
         href={href}
-        className="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
+        className="flex text-sm font-medium transition group text-zinc-800 hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
       >
-        <Icon className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500" />
+        <Icon className="flex-none w-6 h-6 transition fill-zinc-500 group-hover:fill-teal-500" />
         <span className="ml-4">{children}</span>
       </Link>
     </li>
@@ -46,7 +46,7 @@ export default function About() {
               src={bookingInfoPortraitImage}
               alt=""
               sizes="(min-width: 1024px) 32rem, 20rem"
-              className="aspect-rectangle -rotate-2 rounded-2xl border-2 border-black bg-zinc-100 object-cover dark:border-white dark:border-zinc-700"
+              className="object-cover border-2 border-black aspect-rectangle -rotate-2 rounded-2xl bg-zinc-100 dark:border-white dark:border-zinc-700"
             />
           </div>
         </div>
@@ -57,7 +57,7 @@ export default function About() {
               Information about private bookings
             </h1>
 
-            <section className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
+            <section className="mt-6 text-base space-y-7 text-zinc-600 dark:text-zinc-400">
               <p>
                 Private bookings are available for a variety of events including
                 weddings, corporate functions, private parties, and more. With a
@@ -67,11 +67,11 @@ export default function About() {
               </p>
             </section>
 
-            <section className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
+            <section className="mt-6 text-base space-y-7 text-zinc-600 dark:text-zinc-400">
               <h2 className="text-lg font-bold tracking-tight text-zinc-800 sm:text-xl dark:text-zinc-100">
                 Services offered
               </h2>
-              <ol className="list-decimal space-y-2 pl-5">
+              <ol className="pl-5 space-y-2 list-decimal">
                 <li>Wedding ceremonies and receptions</li>
                 <li>Corporate events and functions</li>
                 <li>Private parties and gatherings</li>
@@ -88,14 +88,14 @@ export default function About() {
 
           <div>
             <div>
-              <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg ">
+              <div className="max-w-xl mx-auto lg:mx-0 lg:max-w-lg ">
                 <form
-                  action="/thank-you/"
+                  action={process.env.NODE_ENV === 'development' ? '/api/submit' : '/thank-you.html'}
                   method="POST"
                   className="mt-8 border-t border-gray-900/10 dark:border-zinc-400"
                   name="private-booking-inquiry"
                   data-netlify="true"
-                  netlify
+                  netlify-honeypot="bot-field"
                 >
                   <input
                     type="hidden"
@@ -103,10 +103,10 @@ export default function About() {
                     value="private-booking-inquiry"
                   />
 
-                  <div className="mt-8 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+                  <div className="grid grid-cols-1 mt-8 gap-x-8 gap-y-6 sm:grid-cols-2">
                     <p class="hidden">
                       <label>
-                        Don’t fill this out if you’re human:{' '}
+                        Don't fill this out if you're human:
                         <input name="bot-field" />
                       </label>
                     </p>
@@ -210,7 +210,7 @@ export default function About() {
                       </div>
                     </div>
                   </div>
-                  <div className="mt-10 flex justify-end">
+                  <div className="flex justify-end mt-10">
                     <button
                       type="submit"
                       className="cursor-pointer rounded-md bg-gray-900 px-3.5 py-2.5 text-center text-sm font-semibold font-semibold text-white shadow-sm hover:opacity-75 focus-visible:outline focus-visible:outline-2 dark:bg-zinc-700 "
