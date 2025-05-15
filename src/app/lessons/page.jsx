@@ -139,20 +139,18 @@ export default function About() {
             <div>
               <div className="max-w-xl mx-auto lg:mx-0 lg:max-w-lg ">
                 <form
-                  action={process.env.NODE_ENV === 'development' ? '/api/submit' : '/thank-you'}
+                  action={process.env.NODE_ENV === 'development' ? '/api/submit' : '/thank-you.html'}
                   method="POST"
                   className="mt-8 border-t border-gray-900/10 dark:border-zinc-400"
                   name="private-lesson-inquiry"
                   data-netlify="true"
                   data-netlify-honeypot="bot-field"
-                  data-netlify-recaptcha="true"
                 >
                   <input
                     type="hidden"
                     name="form-name"
                     value="private-lesson-inquiry"
                   />
-                  <input type="hidden" name="success" value="/thank-you" />
                   <div className="grid grid-cols-1 mt-8 gap-x-8 gap-y-6 sm:grid-cols-2">
                     <p class="hidden">
                       <label>
