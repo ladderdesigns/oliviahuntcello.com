@@ -69,7 +69,7 @@ export default function Contact() {
           </p>
         </div>
         <form
-          action={process.env.NODE_ENV === 'development' ? '/api/submit' : '/thank-you.html'}
+          action={process.env.NODE_ENV === 'development' ? '/api/submit' : '/thank-you'}
           method="POST"
           className="mx-auto mt-16 max-w-xl sm:mt-20"
           name="general-contact-inquiry"

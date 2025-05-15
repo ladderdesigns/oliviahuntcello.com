@@ -139,7 +139,7 @@ export default function About() {
             <div>
               <div className="max-w-xl mx-auto lg:mx-0 lg:max-w-lg ">
                 <form
-                  action={process.env.NODE_ENV === 'development' ? '/api/submit' : '/thank-you.html'}
+                  action={process.env.NODE_ENV === 'development' ? '/api/submit' : '/thank-you'}
                   method="POST"
                   className="mt-8 border-t border-gray-900/10 dark:border-zinc-400"
                   name="private-lesson-inquiry"
