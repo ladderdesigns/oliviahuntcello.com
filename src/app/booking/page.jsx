@@ -104,7 +104,7 @@ export default function About() {
                   />
 
                   <div className="grid grid-cols-1 mt-8 gap-x-8 gap-y-6 sm:grid-cols-2">
-                    <p class="hidden">
+                    <p className="hidden">
                       <label>
                         Don&apos;t fill this out if you&apos;re human:
                         <input name="bot-field" />
