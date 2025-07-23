@@ -42,11 +42,11 @@ function Testimonial() {
       <figure className="flex flex-col justify-between flex-auto">
         <blockquote className="leading-8 text-md">
           <p className="italic">
-            “Absolutely wonderful! Olivia is an incredibly warm and nurturing
+            &ldquo;Absolutely wonderful! Olivia is an incredibly warm and nurturing
             teacher that has realistic goals for students while also being
             patient and encouraging. We only worked together briefly but it was
             such a wonderful experience to strategize problem areas together and
-            slowly figure them out. Could not recommend highly enough!”
+            slowly figure them out. Could not recommend highly enough!&rdquo;
           </p>
         </blockquote>
         <figcaption className="flex items-center mt-4 gap-x-6">
@@ -59,13 +59,13 @@ function Testimonial() {
       <figure className="flex flex-col justify-between flex-auto mt-8">
         <blockquote className="leading-8 text-md">
           <p className="italic">
-            “Olivia is amazing! I started taking lessons with her after taking a
+            &ldquo;Olivia is amazing! I started taking lessons with her after taking a
             decade long break from cello, and I was really nervous about jumping
             back into it. Olivia provided such a calm and generative environment
             to learn, practice, and gain confidence. The lessons felt deeply
             collaborative and were really personalized to my individual needs.
             Olivia is a kind, thoughtful, and fun teacher, and I would
-            definitely recommend her!”
+            definitely recommend her!&rdquo;
           </p>
         </blockquote>
         <figcaption className="flex items-center mt-4 gap-x-6">
@@ -139,22 +139,22 @@ export default function About() {
             <div>
               <div className="max-w-xl mx-auto lg:mx-0 lg:max-w-lg ">
                 <form
-                   action="/thank-you.html"
+                  action={process.env.NODE_ENV === 'development' ? '/api/submit' : '/thank-you.html'}
                   method="POST"
                   className="mt-8 border-t border-gray-900/10 dark:border-zinc-400"
                   name="private-lesson-inquiry"
                   data-netlify="true"
-                  netlify-honeypot="bot-field"
+                  data-netlify-honeypot="bot-field"
                 >
                   <input
-                      type="hidden"
-                      name="form-name"
-                      value="prviate-lesson-inquiry"
-                    />
+                    type="hidden"
+                    name="form-name"
+                    value="private-lesson-inquiry"
+                  />
                   <div className="grid grid-cols-1 mt-8 gap-x-8 gap-y-6 sm:grid-cols-2">
                     <p class="hidden">
                       <label>
-                        Don’t fill this out if you’re human:{' '}
+                        Don&apos;t fill this out if you&apos;re human:{" "}
                         <input name="bot-field" />
                       </label>
                     </p>

@@ -69,18 +69,18 @@ export default function Contact() {
           </p>
         </div>
         <form
-          action="/thank-you/"
+          action={process.env.NODE_ENV === 'development' ? '/api/submit' : '/thank-you.html'}
           method="POST"
           className="mx-auto mt-16 max-w-xl sm:mt-20"
           name="general-contact-inquiry"
           data-netlify="true"
-          netlify-honeypot="bot-field"
+          data-netlify-honeypot="bot-field"
         >
           <input type="hidden" name="form-name" value="general-contact-inquiry" />
           <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
             <p class="hidden">
               <label>
-                Don’t fill this out if you’re human: <input name="bot-field" />
+                Don&apos;t fill this out if you&apos;re human: <input name="bot-field" />
               </label>
             </p>
             <div>
