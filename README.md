@@ -6,8 +6,8 @@ Live site: **[oliviahuntcello.com](https://oliviahuntcello.com)**
 
 ## Tech stack
 
-- [Next.js 14](https://nextjs.org) (App Router) with React 18
-- [Tailwind CSS](https://tailwindcss.com) with the typography plugin and class-based dark mode via [`next-themes`](https://github.com/pacocoursey/next-themes)
+- [Next.js 16](https://nextjs.org) (App Router, Turbopack) with React 19
+- [Tailwind CSS 4](https://tailwindcss.com) with the typography plugin and class-based dark mode via [`next-themes`](https://github.com/pacocoursey/next-themes)
 - [MDX](https://mdxjs.com) for long-form writing (`src/app/writing`)
 - [Netlify](https://www.netlify.com) for hosting and [Netlify Forms](https://docs.netlify.com/forms/setup/) for inquiries
 
@@ -15,7 +15,7 @@ The design is based on the [Spotlight](https://tailwindui.com/templates/spotligh
 
 ## Getting started
 
-Requires Node.js 18.17 or later.
+Requires Node.js 20.19 or later (Netlify builds with Node 22, pinned in `.nvmrc` and `netlify.toml`).
 
 ```bash
 npm install
@@ -77,7 +77,9 @@ Submissions and email notifications are managed in the Netlify dashboard under *
 
 ## Deployment
 
-The site deploys to Netlify automatically when changes are pushed to `main`. Netlify detects Next.js and runs `npm run build` with its Next.js runtime, so no extra configuration is required.
+The site deploys to Netlify automatically when changes are pushed to `main`. Build settings live in `netlify.toml`. The [Netlify Next.js runtime](https://docs.netlify.com/frameworks/next-js/overview/) (`@netlify/plugin-nextjs` v5) is installed as a dev dependency, so its version is controlled by `package.json` rather than the Netlify dashboard.
+
+To reproduce a Netlify build locally, run `npx netlify-cli build` after `netlify link`.
 
 ## License
 
