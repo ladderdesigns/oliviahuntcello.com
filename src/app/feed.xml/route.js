@@ -2,21 +2,17 @@ import assert from 'assert'
 import * as cheerio from 'cheerio'
 import { Feed } from 'feed'
 
+import { siteUrl } from '@/lib/siteUrl'
+
 export async function GET(req) {
-  let siteUrl = process.env.NEXT_PUBLIC_SITE_URL
-
-  if (!siteUrl) {
-    throw Error('Missing NEXT_PUBLIC_SITE_URL environment variable')
-  }
-
   let author = {
-    name: 'Spencer Sharp',
-    email: 'spencer@planetaria.tech',
+    name: 'Olivia Hunt',
+    email: 'olivia.c.hunt@gmail.com',
   }
 
   let feed = new Feed({
     title: author.name,
-    description: 'Your blog description',
+    description: 'Writing on music, teaching, and living as a performer',
     author,
     id: siteUrl,
     link: siteUrl,

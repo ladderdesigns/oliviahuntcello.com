@@ -1,121 +1,98 @@
-import Link from 'next/link'
-import clsx from 'clsx'
-
-import { Container } from '@/components/Container'
+import { SimpleLayout } from '@/components/SimpleLayout'
 
 const videos = [
   {
-    id: 1,
-    src: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    youtubeId: 'aPdSwPe9fTY',
     title: 'Rachmaninoff Sonata for Cello and Piano',
-    description: 'Performed at the Indiana University Jacobs School of Music, Ford Hall',
+    description:
+      'Performed at the Indiana University Jacobs School of Music, Ford Hall',
     date: 'November 4, 2023',
   },
   {
-    id: 2,
-    src: 'https://www.youtube.com/watch?v=xAbfDTLZneE',
+    youtubeId: 'hNGQZo5aumo',
     title: 'Bach Cello Suite no. 6 in D major',
-    description: 'Performed at the Indiana University Jacobs School of Music, Ford Hall',
+    description:
+      'Performed at the Indiana University Jacobs School of Music, Ford Hall',
     date: 'November 4, 2023',
   },
   {
-    id: 3,
-    src: 'https://www.youtube.com/watch?v=xAbfDTLZneE',
-    title: 'Bach Cello Suite no 3 in C Major, Prelude',
-    description: 'Performed at the Indiana University Jacobs School of Music, Ford Hall',
+    youtubeId: '1CJPfeHViUQ',
+    title: 'Bach Cello Suite no. 3 in C major, Prelude',
+    description:
+      'Performed at the Indiana University Jacobs School of Music, Ford Hall',
     date: 'April 28, 2022',
   },
   {
-    id: 4,
-    src: 'https://www.youtube.com/watch?v=xAbfDTLZneE',
-    title: 'Bach Cello Suite no. 3 in C Major, Sarabande',
-    description: 'Performed at the Indiana University Jacobs School of Music, Ford Hall',
+    youtubeId: 'MT6FM0fDhRw',
+    title: 'Bach Cello Suite no. 3 in C major, Sarabande',
+    description:
+      'Performed at the Indiana University Jacobs School of Music, Ford Hall',
     date: 'April 28, 2022',
   },
   {
-    id: 5,
-    src: 'https://www.youtube.com/watch?v=xAbfDTLZneE',
-    title: 'Bach Cello Suite no. 3 in C Major, Gigue',
-    description: 'Performed at the Indiana University Jacobs School of Music, Ford Hall',
+    youtubeId: 'nroVvvNJwgo',
+    title: 'Bach Cello Suite no. 3 in C major, Gigue',
+    description:
+      'Performed at the Indiana University Jacobs School of Music, Ford Hall',
     date: 'April 28, 2022',
   },
   {
-    id: 6,
-    src: 'https://www.youtube.com/watch?v=xAbfDTLZneE',
+    youtubeId: 'Yr-GkpLL8yw',
     title: 'Barber Cello Sonata op. 6',
-    description: 'Performed at the Indiana University Jacobs School of Music, Ford Hall',
+    description:
+      'Performed at the Indiana University Jacobs School of Music, Ford Hall',
     date: 'April 28, 2022',
   },
   {
-    id: 7,
-    src: 'https://www.youtube.com/watch?v=xAbfDTLZneE',
-    title: 'Variations on a Rococo Theme op. 33',
-    description: 'Performed at the Indiana University Jacobs School of Music, Ford Hall',
+    youtubeId: 'xAbfDTLZneE',
+    title: 'Tchaikovsky Variations on a Rococo Theme op. 33',
+    description:
+      'Performed at the Indiana University Jacobs School of Music, Ford Hall',
     date: 'April 28, 2022',
   },
 ]
 
-
-function SocialLink({ className, href, children, icon: Icon }) {
-  return (
-    <li className={clsx(className, 'flex')}>
-      <Link
-        href={href}
-        className="flex text-sm font-medium transition group text-zinc-800 hover:text-green-500 dark:text-zinc-200 dark:hover:text-green-500"
-      >
-        <Icon className="flex-none w-6 h-6 transition fill-zinc-500 group-hover:fill-green-500" />
-        <span className="ml-4">{children}</span>
-      </Link>
-    </li>
-  )
-}
-
-function MailIcon(props) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path
-        fillRule="evenodd"
-        d="M6 5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H6Zm.245 2.187a.75.75 0 0 0-.99 1.126l6.25 5.5a.75.75 0 0 0 .99 0l6.25-5.5a.75.75 0 0 0-.99-1.126L12 12.251 6.245 7.187Z"
-      />
-    </svg>
-  )
-}
-
 export const metadata = {
   title: 'Gallery',
   description:
-    'I’m Olivia Hunt. I live in Bloomington, Indiana where I work as a cellist and teacher.',
+    'Video performances by cellist Olivia Hunt, including Bach, Barber, Rachmaninoff, and Tchaikovsky.',
 }
 
-export default function About() {
+export default function Gallery() {
   return (
-    <Container className="mt-16 sm:mt-32">
-      <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:gap-x-12 lg:gap-y-12">
-        <div>
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-            Video performances
-          </h1>
-          <div>
-            <ul className="mt-4 space-y-8 lg:space-y-4">
-            {videos.map((video) => (
-                 <li key={video.id} className="w-full">
-                  <div className="relative overflow-hidden aspect-w-16 aspect-h-9">
-                    <iframe
-                      className="absolute inset-0 w-full h-full"
-                      src={video.src}
-                      title={video.title}
-                      allowFullScreen
-                    ></iframe>
-                  </div>
-                  <h3 className="mt-2 font-medium">{video.title}</h3>
-                  <p className="text-sm text-gray-600">{video.description}</p>
-                  <p className="text-xs text-gray-500">{video.date}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </Container>
+    <SimpleLayout
+      title="Video performances"
+      intro="Recordings of recent recitals and performances."
+    >
+      <ul
+        role="list"
+        className="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2"
+      >
+        {videos.map((video) => (
+          <li key={video.youtubeId}>
+            <div className="aspect-video overflow-hidden rounded-2xl bg-zinc-100 ring-1 ring-zinc-900/5 dark:bg-zinc-800 dark:ring-white/10">
+              <iframe
+                className="h-full w-full"
+                src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}`}
+                title={video.title}
+                loading="lazy"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </div>
+            <h2 className="mt-4 text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+              {video.title}
+            </h2>
+            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+              {video.description}
+            </p>
+            <p className="mt-1 text-xs text-zinc-400 dark:text-zinc-500">
+              {video.date}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </SimpleLayout>
   )
 }

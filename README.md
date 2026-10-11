@@ -1,42 +1,84 @@
-# Spotlight
+# oliviahuntcello.com
 
-Spotlight is a [Tailwind UI](https://tailwindui.com) site template built using [Tailwind CSS](https://tailwindcss.com) and [Next.js](https://nextjs.org).
+The personal website of [Olivia Hunt](https://oliviahuntcello.com), a Los Angeles–based cellist and teacher. The site covers her biography and experience, private lessons, event bookings, a gallery of performance videos, and contact forms.
+
+Live site: **[oliviahuntcello.com](https://oliviahuntcello.com)**
+
+## Tech stack
+
+- [Next.js 14](https://nextjs.org) (App Router) with React 18
+- [Tailwind CSS](https://tailwindcss.com) with the typography plugin and class-based dark mode via [`next-themes`](https://github.com/pacocoursey/next-themes)
+- [MDX](https://mdxjs.com) for long-form writing (`src/app/writing`)
+- [Netlify](https://www.netlify.com) for hosting and [Netlify Forms](https://docs.netlify.com/forms/setup/) for inquiries
+
+The design is based on the [Spotlight](https://tailwindui.com/templates/spotlight) template from Tailwind UI.
 
 ## Getting started
 
-To get started with this template, first install the npm dependencies:
+Requires Node.js 18.17 or later.
 
 ```bash
 npm install
-```
-
-Next, create a `.env.local` file in the root of your project and set the `NEXT_PUBLIC_SITE_URL` variable to your site's public URL:
-
-```
-NEXT_PUBLIC_SITE_URL=https://example.com
-```
-
-Next, run the development server:
-
-```bash
+cp .env.example .env.local
 npm run dev
 ```
 
-Finally, open [http://localhost:3000](http://localhost:3000) in your browser to view the website.
+Then open [http://localhost:3000](http://localhost:3000).
 
-## Customizing
+| Script           | Description                        |
+| ---------------- | ---------------------------------- |
+| `npm run dev`    | Start the local development server |
+| `npm run build`  | Create a production build          |
+| `npm run start`  | Serve the production build locally |
+| `npm run lint`   | Run ESLint                         |
+| `npm run format` | Format the codebase with Prettier  |
 
-You can start editing this template by modifying the files in the `/src` folder. The site will auto-update as you edit these files.
+### Environment variables
+
+| Variable               | Description                                                                                            |
+| ---------------------- | ------------------------------------------------------------------------------------------------------ |
+| `NEXT_PUBLIC_SITE_URL` | Public URL of the site, used for metadata and the RSS feed. Defaults to `https://oliviahuntcello.com`. |
+
+## Project structure
+
+```
+public/
+  __forms.html        Hidden form definitions that Netlify reads at deploy time
+src/
+  app/                Routes (home, about, lessons, booking, gallery, contact, writing)
+  components/         Shared UI, including the InquiryForm used by every form
+  images/             Portraits, photos, and organization logos
+  lib/                Helpers for articles and date formatting
+```
+
+## Common edits
+
+- **Biography:** `src/app/about/page.jsx` and the preview in `src/app/page.jsx`
+- **Orchestral and chamber experience:** the `Resume` component in `src/app/page.jsx`
+- **Gallery videos:** the `videos` array in `src/app/gallery/page.jsx` (use the YouTube video ID)
+- **Lesson testimonials:** the `testimonials` array in `src/app/lessons/page.jsx`
+- **Navigation:** `src/components/Header.jsx` and `src/components/Footer.jsx`
+
+## Forms
+
+The contact, lessons, and booking pages each render an `InquiryForm` (`src/components/InquiryForm.jsx`), which submits to Netlify Forms with `fetch` and then redirects to `/thank-you`.
+
+Netlify only discovers forms from static HTML, so every form and field must also be declared in `public/__forms.html`. If you add, rename, or remove a field, update both places. Otherwise Netlify silently drops that field from submissions.
+
+| Form name                 | Page       |
+| ------------------------- | ---------- |
+| `general-contact-inquiry` | `/contact` |
+| `private-lesson-inquiry`  | `/lessons` |
+| `private-booking-inquiry` | `/booking` |
+
+Submissions only reach Netlify on a deployed site. In local development, the form logs the submission to the browser console and goes straight to the thank-you page.
+
+Submissions and email notifications are managed in the Netlify dashboard under **Forms**.
+
+## Deployment
+
+The site deploys to Netlify automatically when changes are pushed to `main`. Netlify detects Next.js and runs `npm run build` with its Next.js runtime, so no extra configuration is required.
 
 ## License
 
-This site template is a commercial product and is licensed under the [Tailwind UI license](https://tailwindui.com/license).
-
-## Learn more
-
-To learn more about the technologies used in this site template, see the following resources:
-
-- [Tailwind CSS](https://tailwindcss.com/docs) - the official Tailwind CSS documentation
-- [Next.js](https://nextjs.org/docs) - the official Next.js documentation
-- [Headless UI](https://headlessui.dev) - the official Headless UI documentation
-- [MDX](https://mdxjs.com) - the MDX documentation
+The site is built on a commercial Tailwind UI template and is licensed under the [Tailwind UI license](https://tailwindui.com/license). See [LICENSE.md](LICENSE.md). Site content and images are © Olivia Hunt.
