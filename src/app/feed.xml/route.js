@@ -2,10 +2,9 @@ import assert from 'assert'
 import * as cheerio from 'cheerio'
 import { Feed } from 'feed'
 
-export async function GET(req) {
-  let siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ?? 'https://oliviahuntcello.com'
+import { siteUrl } from '@/lib/siteUrl'
 
+export async function GET(req) {
   let author = {
     name: 'Olivia Hunt',
     email: 'olivia.c.hunt@gmail.com',

@@ -1,10 +1,8 @@
 import { Providers } from '@/app/providers'
 import { Layout } from '@/components/Layout'
+import { siteUrl } from '@/lib/siteUrl'
 
 import '@/styles/tailwind.css'
-
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://oliviahuntcello.com'
 
 const description =
   'Olivia Hunt is a Los Angeles–based cellist and teacher. She is the Assistant Principal Cellist of the Billings Symphony, a substitute with the Owensboro Symphony Orchestra and Evansville Philharmonic, and offers private lessons and performances throughout the Los Angeles area.'
