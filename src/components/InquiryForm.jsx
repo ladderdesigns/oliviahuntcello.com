@@ -20,7 +20,7 @@ export function Field({
   let id = useId()
   let hintId = `${id}-hint`
   let inputClassName =
-    'block w-full rounded-md border-0 bg-white px-3.5 py-2 text-base text-zinc-900 shadow-sm ring-1 ring-inset ring-zinc-300 placeholder:text-zinc-400 focus:ring-2 focus:ring-inset focus:ring-green-500 sm:text-sm sm:leading-6 dark:bg-zinc-800 dark:text-zinc-100 dark:ring-zinc-700 dark:focus:ring-green-400'
+    'block w-full rounded-md border-0 bg-white px-3.5 py-2 text-base text-zinc-900 shadow-xs ring-1 ring-inset ring-zinc-300 placeholder:text-zinc-400 focus:ring-2 focus:ring-inset focus:ring-green-500 sm:text-sm sm:leading-6 dark:bg-zinc-800 dark:text-zinc-100 dark:ring-zinc-700 dark:focus:ring-green-400'
   let Component = multiline ? 'textarea' : 'input'
 
   return (
@@ -121,7 +121,7 @@ export function InquiryForm({ name, className, children }) {
         <button
           type="submit"
           disabled={status === 'submitting'}
-          className="w-full rounded-md bg-zinc-800 px-3.5 py-2.5 text-center text-sm font-semibold text-zinc-100 shadow-sm transition hover:bg-zinc-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto dark:bg-zinc-700 dark:hover:bg-zinc-600"
+          className="w-full rounded-md bg-zinc-800 px-3.5 py-2.5 text-center text-sm font-semibold text-zinc-100 shadow-xs transition hover:bg-zinc-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 focus-visible:outline-solid disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto dark:bg-zinc-700 dark:hover:bg-zinc-600"
         >
           {status === 'submitting' ? 'Sending…' : 'Send message'}
         </button>
