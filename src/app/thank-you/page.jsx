@@ -1,15 +1,21 @@
+import { Button } from '@/components/Button'
 import { SimpleLayout } from '@/components/SimpleLayout'
 
 export const metadata = {
-  title: 'Message recieved',
-  description: 'Thanks for subscribing to my newsletter.',
+  title: 'Message received',
+  description: 'Thanks for reaching out. Olivia will be in touch shortly.',
+  robots: { index: false },
 }
 
 export default function ThankYou() {
   return (
     <SimpleLayout
       title="Thank you for your message"
-      intro="If applicable, you will receive a response shortly."
-    />
+      intro="Your message has been received. Olivia will get back to you as soon as possible."
+    >
+      <Button href="/" variant="secondary">
+        Back to home
+      </Button>
+    </SimpleLayout>
   )
 }
