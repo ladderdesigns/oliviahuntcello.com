@@ -1,11 +1,16 @@
 'use client'
 
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useSyncExternalStore } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTheme } from 'next-themes'
-import { Popover, Transition } from '@headlessui/react'
+import {
+  Popover,
+  PopoverBackdrop,
+  PopoverButton,
+  PopoverPanel,
+} from '@headlessui/react'
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
@@ -75,9 +80,9 @@ function MoonIcon(props) {
 function MobileNavItem({ href, children }) {
   return (
     <li>
-      <Popover.Button as={Link} href={href} className="block py-2">
+      <PopoverButton as={Link} href={href} className="block py-2">
         {children}
-      </Popover.Button>
+      </PopoverButton>
     </li>
   )
 }
@@ -85,55 +90,37 @@ function MobileNavItem({ href, children }) {
 function MobileNavigation(props) {
   return (
     <Popover {...props}>
-      <Popover.Button className="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20">
+      <PopoverButton className="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20">
         Menu
         <ChevronDownIcon className="ml-3 h-auto w-2 stroke-zinc-500 group-hover:stroke-zinc-700 dark:group-hover:stroke-zinc-400" />
-      </Popover.Button>
-      <Transition.Root>
-        <Transition.Child
-          as={Fragment}
-          enter="duration-150 ease-out"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="duration-150 ease-in"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <Popover.Overlay className="fixed inset-0 z-50 bg-zinc-800/40 backdrop-blur-sm dark:bg-black/80" />
-        </Transition.Child>
-        <Transition.Child
-          as={Fragment}
-          enter="duration-150 ease-out"
-          enterFrom="opacity-0 scale-95"
-          enterTo="opacity-100 scale-100"
-          leave="duration-150 ease-in"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
-        >
-          <Popover.Panel
-            focus
-            className="fixed inset-x-4 top-8 z-50 origin-top rounded-3xl bg-white p-8 ring-1 ring-zinc-900/5 dark:bg-zinc-900 dark:ring-zinc-800"
-          >
-            <div className="flex flex-row-reverse items-center justify-between">
-              <Popover.Button aria-label="Close menu" className="-m-1 p-1">
-                <CloseIcon className="h-6 w-6 text-zinc-500 dark:text-zinc-400" />
-              </Popover.Button>
-              <h2 className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
-                Navigation
-              </h2>
-            </div>
-            <nav className="mt-6">
-              <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
-                <MobileNavItem href="/about">About</MobileNavItem>
-                <MobileNavItem href="/lessons">Lessons</MobileNavItem>
-                <MobileNavItem href="/booking">Booking</MobileNavItem>
-                <MobileNavItem href="/gallery">Gallery</MobileNavItem>
-                <MobileNavItem href="/contact">Contact</MobileNavItem>
-              </ul>
-            </nav>
-          </Popover.Panel>
-        </Transition.Child>
-      </Transition.Root>
+      </PopoverButton>
+      <PopoverBackdrop
+        transition
+        className="fixed inset-0 z-50 bg-zinc-800/40 backdrop-blur-xs duration-150 data-closed:opacity-0 data-enter:ease-out data-leave:ease-in dark:bg-black/80"
+      />
+      <PopoverPanel
+        focus
+        transition
+        className="fixed inset-x-4 top-8 z-50 origin-top rounded-3xl bg-white p-8 ring-1 ring-zinc-900/5 duration-150 data-closed:scale-95 data-closed:opacity-0 data-enter:ease-out data-leave:ease-in dark:bg-zinc-900 dark:ring-zinc-800"
+      >
+        <div className="flex flex-row-reverse items-center justify-between">
+          <PopoverButton aria-label="Close menu" className="-m-1 p-1">
+            <CloseIcon className="h-6 w-6 text-zinc-500 dark:text-zinc-400" />
+          </PopoverButton>
+          <h2 className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
+            Navigation
+          </h2>
+        </div>
+        <nav className="mt-6">
+          <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
+            <MobileNavItem href="/about">About</MobileNavItem>
+            <MobileNavItem href="/lessons">Lessons</MobileNavItem>
+            <MobileNavItem href="/booking">Booking</MobileNavItem>
+            <MobileNavItem href="/gallery">Gallery</MobileNavItem>
+            <MobileNavItem href="/contact">Contact</MobileNavItem>
+          </ul>
+        </nav>
+      </PopoverPanel>
     </Popover>
   )
 }
@@ -154,7 +141,7 @@ function NavItem({ href, children }) {
       >
         {children}
         {isActive && (
-          <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-green-500/0 via-green-500/40 to-green-500/0 dark:from-green-400/0 dark:via-green-400/40 dark:to-green-400/0" />
+          <span className="absolute inset-x-1 -bottom-px h-px bg-linear-to-r from-green-500/0 via-green-500/40 to-green-500/0 dark:from-green-400/0 dark:via-green-400/40 dark:to-green-400/0" />
         )}
       </Link>
     </li>
@@ -164,7 +151,7 @@ function NavItem({ href, children }) {
 function DesktopNavigation(props) {
   return (
     <nav {...props}>
-      <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
+      <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
         <NavItem href="/about">About</NavItem>
         <NavItem href="/lessons">Lessons</NavItem>
         <NavItem href="/booking">Booking</NavItem>
@@ -175,24 +162,28 @@ function DesktopNavigation(props) {
   )
 }
 
+function subscribeToNothing() {
+  return () => {}
+}
+
 function ThemeToggle() {
   let { resolvedTheme, setTheme } = useTheme()
   let otherTheme = resolvedTheme === 'dark' ? 'light' : 'dark'
-  let [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  let mounted = useSyncExternalStore(
+    subscribeToNothing,
+    () => true,
+    () => false,
+  )
 
   return (
     <button
       type="button"
       aria-label={mounted ? `Switch to ${otherTheme} theme` : 'Toggle theme'}
-      className="group rounded-full bg-white/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:bg-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
+      className="group rounded-full bg-white/90 px-3 py-2 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm transition dark:bg-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
       onClick={() => setTheme(otherTheme)}
     >
       <SunIcon className="h-6 w-6 fill-zinc-100 stroke-zinc-500 transition group-hover:fill-zinc-200 group-hover:stroke-zinc-700 dark:hidden [@media(prefers-color-scheme:dark)]:fill-green-50 [@media(prefers-color-scheme:dark)]:stroke-green-500 [@media(prefers-color-scheme:dark)]:group-hover:fill-green-50 [@media(prefers-color-scheme:dark)]:group-hover:stroke-green-600" />
-      <MoonIcon className="hidden h-6 w-6 fill-zinc-700 stroke-zinc-500 transition dark:block [@media(prefers-color-scheme:dark)]:group-hover:stroke-zinc-400 [@media_not_(prefers-color-scheme:dark)]:fill-green-400/10 [@media_not_(prefers-color-scheme:dark)]:stroke-green-500" />
+      <MoonIcon className="hidden h-6 w-6 fill-zinc-700 stroke-zinc-500 transition not-[@media_(prefers-color-scheme:dark)]:fill-green-400/10 not-[@media_(prefers-color-scheme:dark)]:stroke-green-500 dark:block [@media(prefers-color-scheme:dark)]:group-hover:stroke-zinc-400" />
     </button>
   )
 }
@@ -208,7 +199,7 @@ function AvatarContainer({ className, ...props }) {
     <div
       className={clsx(
         className,
-        'h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10',
+        'h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm dark:bg-zinc-800/90 dark:ring-white/10',
       )}
       {...props}
     />
@@ -357,7 +348,7 @@ export function Header() {
           <>
             <div
               ref={avatarRef}
-              className="order-last mt-[calc(theme(spacing.16)-theme(spacing.3))]"
+              className="order-last mt-[calc(--spacing(16)-(--spacing(3)))]"
             />
             <Container
               className="top-0 order-last -mb-3 pt-3"
@@ -366,14 +357,14 @@ export function Header() {
               }}
             >
               <div
-                className="top-[var(--avatar-top,theme(spacing.3))] w-full"
+                className="top-(--avatar-top,--spacing(3)) w-full"
                 style={{
                   position: 'var(--header-inner-position)',
                 }}
               >
                 <div className="relative">
                   <AvatarContainer
-                    className="absolute left-0 top-3 origin-left transition-opacity"
+                    className="absolute top-3 left-0 origin-left transition-opacity"
                     style={{
                       opacity: 'var(--avatar-border-opacity, 0)',
                       transform: 'var(--avatar-border-transform)',
@@ -397,7 +388,7 @@ export function Header() {
           }}
         >
           <Container
-            className="top-[var(--header-top,theme(spacing.6))] w-full"
+            className="top-(--header-top,--spacing(6)) w-full"
             style={{
               position: 'var(--header-inner-position)',
             }}
