@@ -7,7 +7,7 @@ Live site: **[oliviahuntcello.com](https://oliviahuntcello.com)**
 ## Tech stack
 
 - [Next.js 16](https://nextjs.org) (App Router, Turbopack) with React 19
-- [Tailwind CSS 4](https://tailwindcss.com) with the typography plugin and class-based dark mode via [`next-themes`](https://github.com/pacocoursey/next-themes)
+- [Tailwind CSS 4](https://tailwindcss.com) with the typography plugin
 - [MDX](https://mdxjs.com) for long-form writing (`src/app/writing`)
 - [Netlify](https://www.netlify.com) for hosting and [Netlify Forms](https://docs.netlify.com/forms/setup/) for inquiries
 

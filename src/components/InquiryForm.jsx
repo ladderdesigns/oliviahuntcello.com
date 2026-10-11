@@ -20,20 +20,17 @@ export function Field({
   let id = useId()
   let hintId = `${id}-hint`
   let inputClassName =
-    'block w-full rounded-md border-0 bg-white px-3.5 py-2 text-base text-zinc-900 shadow-xs ring-1 ring-inset ring-zinc-300 placeholder:text-zinc-400 focus:ring-2 focus:ring-inset focus:ring-green-500 sm:text-sm sm:leading-6 dark:bg-zinc-800 dark:text-zinc-100 dark:ring-zinc-700 dark:focus:ring-green-400'
+    'block w-full rounded-md border-0 bg-white px-3.5 py-2 text-base text-zinc-900 shadow-xs ring-1 ring-inset ring-zinc-300 placeholder:text-zinc-400 focus:ring-2 focus:ring-inset focus:ring-green-500 sm:text-sm sm:leading-6'
   let Component = multiline ? 'textarea' : 'input'
 
   return (
     <div className={className}>
       <div className="flex items-baseline justify-between gap-4 text-sm leading-6">
-        <label
-          htmlFor={id}
-          className="block font-semibold text-zinc-700 dark:text-zinc-300"
-        >
+        <label htmlFor={id} className="block font-semibold text-zinc-700">
           {label}
         </label>
         {optional && (
-          <span id={hintId} className="text-zinc-400 dark:text-zinc-500">
+          <span id={hintId} className="text-zinc-400">
             Optional
           </span>
         )}
@@ -108,7 +105,7 @@ export function InquiryForm({ name, className, children }) {
       {status === 'error' && (
         <p
           role="alert"
-          className="mt-6 rounded-md bg-red-50 px-4 py-3 text-sm text-red-700 dark:bg-red-500/10 dark:text-red-400"
+          className="mt-6 rounded-md bg-red-50 px-4 py-3 text-sm text-red-700"
         >
           Something went wrong sending your message. Please try again, or email{' '}
           <a href="mailto:olivia.c.hunt@gmail.com" className="underline">
@@ -121,7 +118,7 @@ export function InquiryForm({ name, className, children }) {
         <button
           type="submit"
           disabled={status === 'submitting'}
-          className="w-full rounded-md bg-zinc-800 px-3.5 py-2.5 text-center text-sm font-semibold text-zinc-100 shadow-xs transition hover:bg-zinc-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 focus-visible:outline-solid disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto dark:bg-zinc-700 dark:hover:bg-zinc-600"
+          className="w-full rounded-md bg-zinc-800 px-3.5 py-2.5 text-center text-sm font-semibold text-zinc-100 shadow-xs transition hover:bg-zinc-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 focus-visible:outline-solid disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
         >
           {status === 'submitting' ? 'Sending…' : 'Send message'}
         </button>

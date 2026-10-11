@@ -37,11 +37,11 @@ function BriefcaseIcon(props) {
     >
       <path
         d="M2.75 9.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
-        className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
+        className="fill-zinc-100 stroke-zinc-400"
       />
       <path
         d="M3 14.25h6.249c.484 0 .952-.002 1.316.319l.777.682a.996.996 0 0 0 1.316 0l.777-.682c.364-.32.832-.319 1.316-.319H21M8.75 6.5V4.75a2 2 0 0 1 2-2h2.5a2 2 0 0 1 2 2V6.5"
-        className="stroke-zinc-400 dark:stroke-zinc-500"
+        className="stroke-zinc-400"
       />
     </svg>
   )
@@ -63,7 +63,7 @@ function ArrowUpRightIcon(props) {
 function SocialLink({ icon: Icon, ...props }) {
   return (
     <Link className="group -m-1 p-1" {...props}>
-      <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
+      <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600" />
     </Link>
   )
 }
@@ -79,21 +79,19 @@ function Role({ role }) {
 
   return (
     <li className="flex gap-4">
-      <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
+      <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5">
         <Image src={role.logo} alt="" className="h-7 w-7" unoptimized />
       </div>
       <dl className="flex flex-auto flex-wrap gap-x-2">
         <dt className="sr-only">Company</dt>
-        <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
+        <dd className="w-full flex-none text-sm font-medium text-zinc-900">
           {role.company}
         </dd>
         <dt className="sr-only">Role</dt>
-        <dd className="text-xs text-zinc-500 dark:text-zinc-400">
-          {role.title}
-        </dd>
+        <dd className="text-xs text-zinc-500">{role.title}</dd>
         <dt className="sr-only">Date</dt>
         <dd
-          className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
+          className="ml-auto text-xs text-zinc-400"
           aria-label={`${startLabel} until ${endLabel}`}
         >
           <time dateTime={startDate}>{startLabel}</time>{' '}
@@ -108,10 +106,10 @@ function Role({ role }) {
 function AboutPreview() {
   return (
     <div className="space-y-8">
-      <h2 className="text-2xl font-bold tracking-tight text-zinc-800 sm:text-3xl dark:text-zinc-100">
+      <h2 className="text-2xl font-bold tracking-tight text-zinc-800 sm:text-3xl">
         About Olivia
       </h2>
-      <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
+      <div className="mt-6 space-y-7 text-base text-zinc-600">
         <p className="leading-8">
           Cellist Olivia Hunt began her musical journey at age 9 in Atlanta. She
           went on to earn her Bachelor&apos;s at Vanderbilt University&apos;s
@@ -130,7 +128,7 @@ function AboutPreview() {
           Symphony and a substitute...{' '}
           <Link
             href="/about"
-            className="cursor-pointer text-green-500 hover:text-green-600 dark:text-green-400 dark:hover:text-green-500"
+            className="cursor-pointer text-green-500 hover:text-green-600"
           >
             Read more
           </Link>
@@ -245,8 +243,8 @@ function Resume() {
 
   return (
     <>
-      <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
-        <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+      <div className="rounded-2xl border border-zinc-100 p-6">
+        <h2 className="flex text-sm font-semibold text-zinc-900">
           <BriefcaseIcon className="h-6 w-6" />
           <span className="ml-3">Orchestral experience</span>
         </h2>
@@ -257,8 +255,8 @@ function Resume() {
         </ol>
         <CurriculumVitaeButton />
       </div>
-      <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
-        <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+      <div className="rounded-2xl border border-zinc-100 p-6">
+        <h2 className="flex text-sm font-semibold text-zinc-900">
           <BriefcaseIcon className="h-6 w-6" />
           <span className="ml-3">Chamber experience</span>
         </h2>
@@ -286,7 +284,7 @@ function CurriculumVitaeButton() {
       className="group mt-6 w-full"
     >
       View curriculum vitae
-      <ArrowUpRightIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
+      <ArrowUpRightIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600" />
     </Button>
   )
 }
@@ -301,7 +299,7 @@ function Photos() {
           <div
             key={image.src}
             className={clsx(
-              'relative aspect-9/10 w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 sm:w-72 sm:rounded-2xl dark:bg-zinc-800',
+              'relative aspect-9/10 w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 sm:w-72 sm:rounded-2xl',
               rotations[imageIndex % rotations.length],
             )}
           >
@@ -309,7 +307,7 @@ function Photos() {
               src={image}
               alt=""
               sizes="(min-width: 640px) 18rem, 11rem"
-              className="absolute inset-0 h-full w-full rounded-xl border-2 border-black object-cover sm:rounded-2xl dark:border-zinc-700"
+              className="absolute inset-0 h-full w-full rounded-xl border-2 border-black object-cover sm:rounded-2xl"
             />
           </div>
         ))}
@@ -323,10 +321,10 @@ export default function Home() {
     <>
       <Container className="mt-9">
         <div className="max-w-2xl">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
+          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl">
             Musician, teacher, collaborator
           </h1>
-          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+          <p className="mt-6 text-base text-zinc-600">
             Cellist Olivia Hunt offers private lessons and performances
             throughout the Los Angeles area.
           </p>
