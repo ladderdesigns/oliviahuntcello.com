@@ -20,18 +20,18 @@ export default function Booking() {
               src={bookingInfoPortraitImage}
               alt="Olivia Hunt smiling outdoors with her cello"
               sizes="(min-width: 1024px) 32rem, 20rem"
-              className="-rotate-2 rounded-2xl border-2 border-black bg-zinc-100 object-cover dark:border-zinc-700 dark:bg-zinc-800"
+              className="-rotate-2 rounded-2xl border-2 border-black bg-zinc-100 object-cover"
               priority
             />
           </div>
         </div>
 
         <div className="lg:order-last lg:row-span-2">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
+          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl">
             Information about private bookings
           </h1>
 
-          <section className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
+          <section className="mt-6 space-y-7 text-base text-zinc-600">
             <p>
               Private bookings are available for a variety of events including
               weddings, corporate functions, private parties, and more. With a
@@ -41,8 +41,8 @@ export default function Booking() {
             </p>
           </section>
 
-          <section className="mt-10 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
-            <h2 className="text-lg font-bold tracking-tight text-zinc-800 sm:text-xl dark:text-zinc-100">
+          <section className="mt-10 space-y-7 text-base text-zinc-600">
+            <h2 className="text-lg font-bold tracking-tight text-zinc-800 sm:text-xl">
               Services offered
             </h2>
             <ol className="list-decimal space-y-2 pl-5">
@@ -61,9 +61,9 @@ export default function Booking() {
 
           <section
             id="inquire"
-            className="mt-12 max-w-xl scroll-mt-24 border-t border-zinc-100 pt-10 lg:max-w-lg dark:border-zinc-700/40"
+            className="mt-12 max-w-xl scroll-mt-24 border-t border-zinc-100 pt-10 lg:max-w-lg"
           >
-            <h2 className="text-lg font-bold tracking-tight text-zinc-800 sm:text-xl dark:text-zinc-100">
+            <h2 className="text-lg font-bold tracking-tight text-zinc-800 sm:text-xl">
               Request a quote
             </h2>
             <InquiryForm name="private-booking-inquiry" className="mt-8">

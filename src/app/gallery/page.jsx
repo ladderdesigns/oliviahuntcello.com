@@ -70,7 +70,7 @@ export default function Gallery() {
       >
         {videos.map((video) => (
           <li key={video.youtubeId}>
-            <div className="aspect-video overflow-hidden rounded-2xl bg-zinc-100 ring-1 ring-zinc-900/5 dark:bg-zinc-800 dark:ring-white/10">
+            <div className="aspect-video overflow-hidden rounded-2xl bg-zinc-100 ring-1 ring-zinc-900/5">
               <iframe
                 className="h-full w-full"
                 src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}`}
@@ -81,15 +81,11 @@ export default function Gallery() {
                 allowFullScreen
               />
             </div>
-            <h2 className="mt-4 text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+            <h2 className="mt-4 text-base font-semibold tracking-tight text-zinc-800">
               {video.title}
             </h2>
-            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-              {video.description}
-            </p>
-            <p className="mt-1 text-xs text-zinc-400 dark:text-zinc-500">
-              {video.date}
-            </p>
+            <p className="mt-1 text-sm text-zinc-600">{video.description}</p>
+            <p className="mt-1 text-xs text-zinc-400">{video.date}</p>
           </li>
         ))}
       </ul>

@@ -32,7 +32,7 @@ function Testimonials() {
             <p className="italic">&ldquo;{testimonial.quote}&rdquo;</p>
           </blockquote>
           <figcaption className="mt-4">
-            <div className="font-semibold text-zinc-800 dark:text-zinc-100">
+            <div className="font-semibold text-zinc-800">
               {testimonial.author}
             </div>
             <div className="mt-1">Student</div>
@@ -53,17 +53,17 @@ export default function Lessons() {
               src={lessonInfoPortraitImage}
               alt="Olivia Hunt standing beneath a stone archway holding her cello"
               sizes="(min-width: 1024px) 32rem, 20rem"
-              className="rotate-2 rounded-2xl border-2 border-black bg-zinc-100 object-cover dark:border-zinc-700 dark:bg-zinc-800"
+              className="rotate-2 rounded-2xl border-2 border-black bg-zinc-100 object-cover"
               priority
             />
           </div>
         </div>
         <div className="lg:order-first lg:row-span-2">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
+          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl">
             Information about private lessons
           </h1>
 
-          <section className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
+          <section className="mt-6 space-y-7 text-base text-zinc-600">
             <p>
               Private cello lessons are offered to cellists of any age or skill
               level who are interested in establishing a strong technical
@@ -73,8 +73,8 @@ export default function Lessons() {
             </p>
           </section>
 
-          <section className="mt-10 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
-            <h2 className="text-lg font-bold tracking-tight text-zinc-800 sm:text-xl dark:text-zinc-100">
+          <section className="mt-10 space-y-7 text-base text-zinc-600">
+            <h2 className="text-lg font-bold tracking-tight text-zinc-800 sm:text-xl">
               Topics focused on
             </h2>
             <ol className="list-decimal space-y-2 pl-5">
@@ -91,8 +91,8 @@ export default function Lessons() {
             </p>
           </section>
 
-          <section className="mt-10 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
-            <h2 className="text-lg font-bold tracking-tight text-zinc-800 sm:text-xl dark:text-zinc-100">
+          <section className="mt-10 space-y-7 text-base text-zinc-600">
+            <h2 className="text-lg font-bold tracking-tight text-zinc-800 sm:text-xl">
               Testimonials
             </h2>
             <Testimonials />
@@ -100,9 +100,9 @@ export default function Lessons() {
 
           <section
             id="inquire"
-            className="mt-12 max-w-xl scroll-mt-24 border-t border-zinc-100 pt-10 lg:max-w-lg dark:border-zinc-700/40"
+            className="mt-12 max-w-xl scroll-mt-24 border-t border-zinc-100 pt-10 lg:max-w-lg"
           >
-            <h2 className="text-lg font-bold tracking-tight text-zinc-800 sm:text-xl dark:text-zinc-100">
+            <h2 className="text-lg font-bold tracking-tight text-zinc-800 sm:text-xl">
               Inquire about lessons
             </h2>
             <InquiryForm name="private-lesson-inquiry" className="mt-8">
