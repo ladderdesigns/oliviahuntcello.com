@@ -3,19 +3,38 @@ import { Layout } from '@/components/Layout'
 
 import '@/styles/tailwind.css'
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://oliviahuntcello.com'
+
+const description =
+  'Olivia Hunt is a Los Angeles–based cellist and teacher. She is the Assistant Principal Cellist of the Billings Symphony, a substitute with the Owensboro Symphony Orchestra and Evansville Philharmonic, and offers private lessons and performances throughout the Los Angeles area.'
+
 export const metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     template: '%s - Olivia Hunt',
     default:
-      'Olivia Hunt - orchestral and chamber cellist based in Bloomington, Indiana',
+      'Olivia Hunt - orchestral and chamber cellist based in Los Angeles',
   },
-  description:
-  'Olivia Hunt is a lifelong teacher and student of music. She currently lives in Bloomington, Indiana, where she is the Assistant Principal Cellist of the Billings Symphony and acts as a substitute in the Owensboro Symphony Orchestra and Evansville Philharmonic. In addition to performing she has a passion for teaching, and is on faculty at the Stafford Music Academy in Bloomington, Indiana. Outside of music she enjoys traveling, cuddling her cat, and reading.',
+  description,
+  openGraph: {
+    type: 'website',
+    siteName: 'Olivia Hunt',
+    locale: 'en_US',
+    description,
+  },
   alternates: {
     types: {
-      'application/rss+xml': `${process.env.NEXT_PUBLIC_SITE_URL}/feed.xml`,
+      'application/rss+xml': `${siteUrl}/feed.xml`,
     },
   },
+}
+
+export const viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#fafafa' },
+    { media: '(prefers-color-scheme: dark)', color: '#000000' },
+  ],
 }
 
 export default function RootLayout({ children }) {
