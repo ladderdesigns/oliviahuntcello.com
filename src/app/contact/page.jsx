@@ -2,6 +2,7 @@ import { Field, InquiryForm } from '@/components/InquiryForm'
 import { SimpleLayout } from '@/components/SimpleLayout'
 
 export const metadata = {
+  alternates: { canonical: '/contact' },
   title: 'Contact',
   description:
     'Get in touch with cellist Olivia Hunt. Fill out the form and Olivia will get back to you as soon as possible.',

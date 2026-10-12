@@ -1,4 +1,3 @@
-import { Providers } from '@/app/providers'
 import { Layout } from '@/components/Layout'
 import { siteUrl } from '@/lib/siteUrl'
 
@@ -21,10 +20,8 @@ export const metadata = {
     locale: 'en_US',
     description,
   },
-  alternates: {
-    types: {
-      'application/rss+xml': `${siteUrl}/feed.xml`,
-    },
+  twitter: {
+    card: 'summary_large_image',
   },
 }
 
@@ -37,11 +34,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="h-full antialiased">
       <body className="flex h-full bg-zinc-50">
-        <Providers>
-          <div className="flex w-full">
-            <Layout>{children}</Layout>
-          </div>
-        </Providers>
+        <div className="flex w-full">
+          <Layout>{children}</Layout>
+        </div>
       </body>
     </html>
   )

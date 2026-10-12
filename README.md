@@ -7,8 +7,7 @@ Live site: **[oliviahuntcello.com](https://oliviahuntcello.com)**
 ## Tech stack
 
 - [Next.js 16](https://nextjs.org) (App Router, Turbopack) with React 19
-- [Tailwind CSS 4](https://tailwindcss.com) with the typography plugin
-- [MDX](https://mdxjs.com) for long-form writing (`src/app/writing`)
+- [Tailwind CSS 4](https://tailwindcss.com), configured in `src/styles/tailwind.css`
 - [Netlify](https://www.netlify.com) for hosting and [Netlify Forms](https://docs.netlify.com/forms/setup/) for inquiries
 
 The design is based on the [Spotlight](https://tailwindui.com/templates/spotlight) template from Tailwind UI.
@@ -35,9 +34,9 @@ Then open [http://localhost:3000](http://localhost:3000).
 
 ### Environment variables
 
-| Variable               | Description                                                                                            |
-| ---------------------- | ------------------------------------------------------------------------------------------------------ |
-| `NEXT_PUBLIC_SITE_URL` | Public URL of the site, used for metadata and the RSS feed. Defaults to `https://oliviahuntcello.com`. |
+| Variable               | Description                                                                                                                   |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL` | Public URL of the site, used for canonical URLs, the sitemap, and social previews. Defaults to `https://oliviahuntcello.com`. |
 
 ## Project structure
 
@@ -45,19 +44,25 @@ Then open [http://localhost:3000](http://localhost:3000).
 public/
   __forms.html        Hidden form definitions that Netlify reads at deploy time
 src/
-  app/                Routes (home, about, lessons, booking, gallery, contact, writing)
+  app/                Routes (home, about, lessons, booking, gallery, contact), plus
+                      robots.txt, sitemap.xml, and the social share image
   components/         Shared UI, including the InquiryForm used by every form
   images/             Portraits, photos, and organization logos
-  lib/                Helpers for articles and date formatting
+  lib/                Site content and helpers (navigation, résumé, site URL)
 ```
 
 ## Common edits
 
 - **Biography:** `src/app/about/page.jsx` and the preview in `src/app/page.jsx`
-- **Orchestral and chamber experience:** the `Resume` component in `src/app/page.jsx`
+- **Orchestral and chamber experience:** `src/lib/resume.js` (an `end` of `null` shows as "Present")
 - **Gallery videos:** the `videos` array in `src/app/gallery/page.jsx` (use the YouTube video ID)
 - **Lesson testimonials:** the `testimonials` array in `src/app/lessons/page.jsx`
-- **Navigation:** `src/components/Header.jsx` and `src/components/Footer.jsx`
+- **Navigation:** `src/lib/navigation.js`, which feeds the header, footer, and sitemap. New pages also need `alternates.canonical` in their `metadata`.
+- **Social share image:** `src/app/opengraph-image.jpg` (1200×630) and its alt text in `opengraph-image.alt.txt`
+
+### Adding images
+
+Resize photos before committing them. Next.js serves optimized versions, but the originals are still downloaded by the optimizer and stored in git. Keep photos to about 1600px on the longest side and logos to about 112px square.
 
 ## Forms
 

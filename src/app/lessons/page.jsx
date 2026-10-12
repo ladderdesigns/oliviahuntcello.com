@@ -5,6 +5,7 @@ import { Field, InquiryForm } from '@/components/InquiryForm'
 import lessonInfoPortraitImage from '@/images/lesson-info-portrait.jpg'
 
 export const metadata = {
+  alternates: { canonical: '/lessons' },
   title: 'Lessons',
   description:
     'Private cello lessons are offered to cellists of any age or skill level who are interested in establishing a strong technical foundation and developing their personal artistry. The approach is individualistic and flexible, based on the needs and interests of the student.',
