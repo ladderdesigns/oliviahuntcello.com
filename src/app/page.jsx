@@ -5,24 +5,39 @@ import clsx from 'clsx'
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { LinkedInIcon, MailIcon } from '@/components/SocialIcons'
-
-import logoBillingsSymphonyOrchestra from '@/images/logos/billings-symphony-orchestra.png'
-import logoTerreHaute from '@/images/logos/thso.png'
-import logoEvansvillePhilharmonic from '@/images/logos/evansville-philharmonic.png'
-import logoVanderbilt from '@/images/logos/vanderbilt.png'
-import logoSinfonietta from '@/images/logos/nashville-sinfonietta.png'
-import logoOwensboro from '@/images/logos/owensboro.png'
-import logoNationalMusicFestival from '@/images/logos/national-music-festival.png'
-
-import logoBloomingtonSeal from '@/images/logos/bloomington-seal.png'
-import logoSkylarkTrio from '@/images/logos/skylark-trio.png'
-import logoFestivalProvence from '@/images/logos/festival-provence.png'
-import logoHummingUnderMyFeet from '@/images/logos/humming-under-my-feet.png'
-
 import image2 from '@/images/photos/image-2.jpg'
 import image3 from '@/images/photos/image-3.jpg'
 import image4 from '@/images/photos/image-4.jpg'
 import image5 from '@/images/photos/image-5.jpg'
+import {
+  chamberExperience,
+  curriculumVitaeUrl,
+  orchestralExperience,
+} from '@/lib/resume'
+import { siteUrl } from '@/lib/siteUrl'
+
+export const metadata = {
+  alternates: { canonical: '/' },
+}
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Olivia Hunt',
+  url: siteUrl,
+  jobTitle: 'Cellist and cello teacher',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Los Angeles',
+    addressRegion: 'CA',
+    addressCountry: 'US',
+  },
+  alumniOf: [
+    { '@type': 'CollegeOrUniversity', name: 'Vanderbilt University' },
+    { '@type': 'CollegeOrUniversity', name: 'Indiana University' },
+  ],
+  sameAs: ['https://www.linkedin.com/in/oliviahuntcello/'],
+}
 
 function BriefcaseIcon(props) {
   return (
@@ -68,19 +83,27 @@ function SocialLink({ icon: Icon, ...props }) {
   )
 }
 
+function RoleDates({ start, end }) {
+  if (start === end) {
+    return <time dateTime={String(start)}>{start}</time>
+  }
+
+  let endLabel = end ?? 'Present'
+
+  return (
+    <span aria-label={`${start} until ${endLabel}`}>
+      <time dateTime={String(start)}>{start}</time>{' '}
+      <span aria-hidden="true">—</span>{' '}
+      {end ? <time dateTime={String(end)}>{end}</time> : endLabel}
+    </span>
+  )
+}
+
 function Role({ role }) {
-  let startLabel =
-    typeof role.start === 'string' ? role.start : role.start.label
-  let startDate =
-    typeof role.start === 'string' ? role.start : role.start.dateTime
-
-  let endLabel = typeof role.end === 'string' ? role.end : role.end.label
-  let endDate = typeof role.end === 'string' ? role.end : role.end.dateTime
-
   return (
     <li className="flex gap-4">
       <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5">
-        <Image src={role.logo} alt="" className="h-7 w-7" unoptimized />
+        <Image src={role.logo} alt="" sizes="1.75rem" className="h-7 w-7" />
       </div>
       <dl className="flex flex-auto flex-wrap gap-x-2">
         <dt className="sr-only">Company</dt>
@@ -90,13 +113,8 @@ function Role({ role }) {
         <dt className="sr-only">Role</dt>
         <dd className="text-xs text-zinc-500">{role.title}</dd>
         <dt className="sr-only">Date</dt>
-        <dd
-          className="ml-auto text-xs text-zinc-400"
-          aria-label={`${startLabel} until ${endLabel}`}
-        >
-          <time dateTime={startDate}>{startLabel}</time>{' '}
-          <span aria-hidden="true">—</span>{' '}
-          <time dateTime={endDate}>{endLabel}</time>
+        <dd className="ml-auto text-xs text-zinc-500">
+          <RoleDates start={role.start} end={role.end} />
         </dd>
       </dl>
     </li>
@@ -125,12 +143,12 @@ function AboutPreview() {
           Aspen Music Festival, Green Mountain Chamber Music Festival,
           Brancaleoni International Music Festival, and National Music Festival.
           She is currently the Assistant Principal Cellist of the Billings
-          Symphony and a substitute...{' '}
+          Symphony and a substitute…{' '}
           <Link
             href="/about"
-            className="cursor-pointer text-green-500 hover:text-green-600"
+            className="inline-block py-1 font-medium text-green-700 underline-offset-4 hover:underline"
           >
-            Read more
+            Read more about Olivia
           </Link>
         </p>
       </div>
@@ -138,141 +156,22 @@ function AboutPreview() {
   )
 }
 
-function Resume() {
-  let orchestralResume = [
-    {
-      company: 'Billings Symphony Orchestra',
-      title: 'Assistant principal cello',
-      logo: logoBillingsSymphonyOrchestra,
-      start: '2023',
-      end: {
-        label: 'Present',
-        dateTime: new Date().getFullYear().toString(),
-      },
-    },
-    {
-      company: 'Terre Haute Symphony Orchestra',
-      title: 'Section cellist',
-      logo: logoTerreHaute,
-      start: '2021',
-      end: '2023',
-    },
-    {
-      company: 'Evansville Philharmonic',
-      title: 'Substitute cellist',
-      logo: logoEvansvillePhilharmonic,
-      start: '2022',
-      end: {
-        label: 'Present',
-        dateTime: new Date().getFullYear().toString(),
-      },
-    },
-    {
-      company: 'Owensboro Symphony Orchestra',
-      title: 'Substitute cellist',
-      logo: logoOwensboro,
-      start: '2022',
-      end: {
-        label: 'Present',
-        dateTime: new Date().getFullYear().toString(),
-      },
-    },
-    {
-      company: 'Vanderbilt Symphony Orchestra',
-      title: 'Principal cellist',
-      logo: logoVanderbilt,
-      start: '2019',
-      end: '2019',
-    },
-    {
-      company: 'Nashville Sinfonietta',
-      title: 'Principal cellist',
-      logo: logoSinfonietta,
-      start: '2019',
-      end: '2019',
-    },
-    {
-      company: 'National Music Festival Symphony Orchestra',
-      title: 'Principal cellist',
-      logo: logoNationalMusicFestival,
-      start: '2019',
-      end: '2019',
-    },
-  ]
-
-  let chamberResume = [
-    {
-      company: 'Performer with Bloomington folk artist Carrie Newcomer',
-      title: 'Principal cello',
-      logo: logoBloomingtonSeal,
-      start: '2022',
-      end: '2022',
-    },
-    {
-      company: 'The Skylark Trio',
-      title: 'Founding cellist',
-      logo: logoSkylarkTrio,
-      start: '2020',
-      end: {
-        label: 'Present',
-        dateTime: new Date().getFullYear().toString(),
-      },
-    },
-    {
-      company: 'Vanderbilt University Chorale St. Matthew’s Passion tour',
-      title: 'Continuo cellist',
-      logo: logoVanderbilt,
-      start: '2018',
-      end: '2018',
-    },
-    {
-      company: 'Festival d’Aix en Provence',
-      title: 'String quartet performer',
-      logo: logoFestivalProvence,
-      start: '2017',
-      end: '2017',
-    },
-    {
-      company: '“A Humming Under My Feet”',
-      title: 'Annual performer',
-      logo: logoHummingUnderMyFeet,
-      start: '2017',
-      end: '2019',
-    },
-  ]
-
+function ExperienceList({ title, roles }) {
   return (
-    <>
-      <div className="rounded-2xl border border-zinc-100 p-6">
-        <h2 className="flex text-sm font-semibold text-zinc-900">
-          <BriefcaseIcon className="h-6 w-6" />
-          <span className="ml-3">Orchestral experience</span>
-        </h2>
-        <ol className="mt-6 space-y-4">
-          {orchestralResume.map((role, roleIndex) => (
-            <Role key={roleIndex} role={role} />
-          ))}
-        </ol>
-        <CurriculumVitaeButton />
-      </div>
-      <div className="rounded-2xl border border-zinc-100 p-6">
-        <h2 className="flex text-sm font-semibold text-zinc-900">
-          <BriefcaseIcon className="h-6 w-6" />
-          <span className="ml-3">Chamber experience</span>
-        </h2>
-        <ol className="mt-6 space-y-4">
-          {chamberResume.map((role, roleIndex) => (
-            <Role key={roleIndex} role={role} />
-          ))}
-        </ol>
-        <CurriculumVitaeButton />
-      </div>
-    </>
+    <div className="rounded-2xl border border-zinc-100 p-6">
+      <h2 className="flex text-sm font-semibold text-zinc-900">
+        <BriefcaseIcon className="h-6 w-6" />
+        <span className="ml-3">{title}</span>
+      </h2>
+      <ol className="mt-6 space-y-4">
+        {roles.map((role) => (
+          <Role key={role.company} role={role} />
+        ))}
+      </ol>
+      <CurriculumVitaeButton />
+    </div>
   )
 }
-
-const curriculumVitaeUrl =
-  'https://drive.google.com/file/d/1CSoTuah2tiZ_uQurmRGDjNkMAV4meBD8/view?usp=drive_link'
 
 function CurriculumVitaeButton() {
   return (
@@ -289,24 +188,30 @@ function CurriculumVitaeButton() {
   )
 }
 
-function Photos() {
-  let rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2']
+const photos = [
+  { image: image2, rotation: 'rotate-2' },
+  { image: image3, rotation: '-rotate-2' },
+  { image: image4, rotation: 'rotate-2' },
+  { image: image5, rotation: 'rotate-2' },
+]
 
+function Photos() {
   return (
     <div className="mt-16 sm:mt-20">
       <div className="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
-        {[image2, image3, image4, image5].map((image, imageIndex) => (
+        {photos.map(({ image, rotation }, index) => (
           <div
             key={image.src}
             className={clsx(
               'relative aspect-9/10 w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 sm:w-72 sm:rounded-2xl',
-              rotations[imageIndex % rotations.length],
+              rotation,
             )}
           >
             <Image
               src={image}
               alt=""
               sizes="(min-width: 640px) 18rem, 11rem"
+              priority={index < 2}
               className="absolute inset-0 h-full w-full rounded-xl border-2 border-black object-cover sm:rounded-2xl"
             />
           </div>
@@ -319,6 +224,10 @@ function Photos() {
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+      />
       <Container className="mt-9">
         <div className="max-w-2xl">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl">
@@ -349,7 +258,14 @@ export default function Home() {
             <AboutPreview />
           </div>
           <div className="space-y-10 lg:pl-16 xl:pl-24">
-            <Resume />
+            <ExperienceList
+              title="Orchestral experience"
+              roles={orchestralExperience}
+            />
+            <ExperienceList
+              title="Chamber experience"
+              roles={chamberExperience}
+            />
           </div>
         </div>
       </Container>

@@ -1,16 +1,4 @@
-import nextMDX from '@next/mdx'
-
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
-}
+const nextConfig = {}
 
-const withMDX = nextMDX({
-  extension: /\.mdx?$/,
-  options: {
-    // Turbopack requires plugins to be referenced by package name.
-    remarkPlugins: ['remark-gfm'],
-  },
-})
-
-export default withMDX(nextConfig)
+export default nextConfig

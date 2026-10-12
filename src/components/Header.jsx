@@ -14,6 +14,7 @@ import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
 import avatarImage from '@/images/avatar.jpg'
+import { navigation } from '@/lib/navigation'
 
 function CloseIcon(props) {
   return (
@@ -78,11 +79,11 @@ function MobileNavigation(props) {
         </div>
         <nav className="mt-6">
           <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800">
-            <MobileNavItem href="/about">About</MobileNavItem>
-            <MobileNavItem href="/lessons">Lessons</MobileNavItem>
-            <MobileNavItem href="/booking">Booking</MobileNavItem>
-            <MobileNavItem href="/gallery">Gallery</MobileNavItem>
-            <MobileNavItem href="/contact">Contact</MobileNavItem>
+            {navigation.map((item) => (
+              <MobileNavItem key={item.href} href={item.href}>
+                {item.label}
+              </MobileNavItem>
+            ))}
           </ul>
         </nav>
       </PopoverPanel>
@@ -99,7 +100,7 @@ function NavItem({ href, children }) {
         href={href}
         className={clsx(
           'relative block px-3 py-2 transition',
-          isActive ? 'text-green-500' : 'hover:text-green-500',
+          isActive ? 'text-green-700' : 'hover:text-green-700',
         )}
       >
         {children}
@@ -115,11 +116,11 @@ function DesktopNavigation(props) {
   return (
     <nav {...props}>
       <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm">
-        <NavItem href="/about">About</NavItem>
-        <NavItem href="/lessons">Lessons</NavItem>
-        <NavItem href="/booking">Booking</NavItem>
-        <NavItem href="/gallery">Gallery</NavItem>
-        <NavItem href="/contact">Contact</NavItem>
+        {navigation.map((item) => (
+          <NavItem key={item.href} href={item.href}>
+            {item.label}
+          </NavItem>
+        ))}
       </ul>
     </nav>
   )

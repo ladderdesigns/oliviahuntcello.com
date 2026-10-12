@@ -1,4 +1,5 @@
 import { SimpleLayout } from '@/components/SimpleLayout'
+import { YouTubeVideo } from '@/components/YouTubeVideo'
 
 const videos = [
   {
@@ -53,6 +54,7 @@ const videos = [
 ]
 
 export const metadata = {
+  alternates: { canonical: '/gallery' },
   title: 'Gallery',
   description:
     'Video performances by cellist Olivia Hunt, including Bach, Barber, Rachmaninoff, and Tchaikovsky.',
@@ -68,24 +70,20 @@ export default function Gallery() {
         role="list"
         className="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2"
       >
-        {videos.map((video) => (
+        {videos.map((video, index) => (
           <li key={video.youtubeId}>
             <div className="aspect-video overflow-hidden rounded-2xl bg-zinc-100 ring-1 ring-zinc-900/5">
-              <iframe
-                className="h-full w-full"
-                src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}`}
+              <YouTubeVideo
+                id={video.youtubeId}
                 title={video.title}
-                loading="lazy"
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
+                priority={index < 2}
               />
             </div>
             <h2 className="mt-4 text-base font-semibold tracking-tight text-zinc-800">
               {video.title}
             </h2>
             <p className="mt-1 text-sm text-zinc-600">{video.description}</p>
-            <p className="mt-1 text-xs text-zinc-400">{video.date}</p>
+            <p className="mt-1 text-xs text-zinc-500">{video.date}</p>
           </li>
         ))}
       </ul>

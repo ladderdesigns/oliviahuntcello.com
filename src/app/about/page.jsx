@@ -11,9 +11,9 @@ function SocialLink({ className, href, children, icon: Icon }) {
     <li className={clsx(className, 'flex')}>
       <Link
         href={href}
-        className="group flex text-sm font-medium text-zinc-800 transition hover:text-green-500"
+        className="group flex text-sm font-medium text-zinc-800 transition hover:text-green-700"
       >
-        <Icon className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-green-500" />
+        <Icon className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-green-700" />
         <span className="ml-4">{children}</span>
       </Link>
     </li>
@@ -21,6 +21,7 @@ function SocialLink({ className, href, children, icon: Icon }) {
 }
 
 export const metadata = {
+  alternates: { canonical: '/about' },
   title: 'About',
   description:
     'Olivia Hunt is a Los Angeles–based cellist and teacher, and Assistant Principal Cellist of the Billings Symphony.',

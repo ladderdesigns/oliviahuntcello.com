@@ -5,6 +5,7 @@ import { Field, InquiryForm } from '@/components/InquiryForm'
 import bookingInfoPortraitImage from '@/images/booking-info-portrait-image.jpeg'
 
 export const metadata = {
+  alternates: { canonical: '/booking' },
   title: 'Booking',
   description:
     'Book Olivia Hunt, a professional cellist, for your private events, weddings, corporate functions, and more. Experience a versatile and professional performance tailored to your special occasion.',

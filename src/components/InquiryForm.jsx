@@ -30,7 +30,7 @@ export function Field({
           {label}
         </label>
         {optional && (
-          <span id={hintId} className="text-zinc-400">
+          <span id={hintId} className="text-zinc-500">
             Optional
           </span>
         )}
