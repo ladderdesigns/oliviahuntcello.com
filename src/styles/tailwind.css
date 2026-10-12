@@ -39,6 +39,16 @@
   }
 }
 
+/*
+  Reserve space for the scrollbar so short pages, like the thank-you page,
+  don't shift sideways on systems that always show scrollbars.
+*/
+@layer base {
+  html {
+    scrollbar-gutter: stable;
+  }
+}
+
 @layer base {
   button:not(:disabled),
   [role='button']:not(:disabled) {

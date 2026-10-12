@@ -2,6 +2,7 @@
 
 import { useId, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import clsx from 'clsx'
 
 // Netlify only captures submissions POSTed to a static file that declares the
 // form, so every form rendered here must also be declared in this file.
@@ -120,7 +121,24 @@ export function InquiryForm({ name, className, children }) {
           disabled={status === 'submitting'}
           className="w-full rounded-md bg-zinc-800 px-3.5 py-2.5 text-center text-sm font-semibold text-zinc-100 shadow-xs transition hover:bg-zinc-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 focus-visible:outline-solid disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
         >
-          {status === 'submitting' ? 'Sending…' : 'Send message'}
+          <span className="grid">
+            <span
+              className={clsx(
+                'col-start-1 row-start-1',
+                status === 'submitting' && 'invisible',
+              )}
+            >
+              Send message
+            </span>
+            <span
+              className={clsx(
+                'col-start-1 row-start-1',
+                status !== 'submitting' && 'invisible',
+              )}
+            >
+              Sending…
+            </span>
+          </span>
         </button>
       </div>
     </form>
