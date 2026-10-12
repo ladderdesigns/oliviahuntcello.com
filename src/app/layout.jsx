@@ -1,32 +1,42 @@
-import { Providers } from '@/app/providers'
 import { Layout } from '@/components/Layout'
+import { siteUrl } from '@/lib/siteUrl'
 
 import '@/styles/tailwind.css'
 
+const description =
+  'Olivia Hunt is a Los Angeles–based cellist and teacher. She is the Assistant Principal Cellist of the Billings Symphony, a substitute with the Owensboro Symphony Orchestra and Evansville Philharmonic, and offers private lessons and performances throughout the Los Angeles area.'
+
 export const metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     template: '%s - Olivia Hunt',
     default:
-      'Olivia Hunt - orchestral and chamber cellist based in Bloomington, Indiana',
+      'Olivia Hunt - orchestral and chamber cellist based in Los Angeles',
   },
-  description:
-  'Olivia Hunt is a lifelong teacher and student of music. She currently lives in Bloomington, Indiana, where she is the Assistant Principal Cellist of the Billings Symphony and acts as a substitute in the Owensboro Symphony Orchestra and Evansville Philharmonic. In addition to performing she has a passion for teaching, and is on faculty at the Stafford Music Academy in Bloomington, Indiana. Outside of music she enjoys traveling, cuddling her cat, and reading.',
-  alternates: {
-    types: {
-      'application/rss+xml': `${process.env.NEXT_PUBLIC_SITE_URL}/feed.xml`,
-    },
+  description,
+  openGraph: {
+    type: 'website',
+    siteName: 'Olivia Hunt',
+    locale: 'en_US',
+    description,
   },
+  twitter: {
+    card: 'summary_large_image',
+  },
+}
+
+export const viewport = {
+  themeColor: '#fafafa',
+  colorScheme: 'light',
 }
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="h-full antialiased" suppressHydrationWarning>
-      <body className="flex h-full bg-zinc-50 dark:bg-black">
-        <Providers>
-          <div className="flex w-full">
-            <Layout>{children}</Layout>
-          </div>
-        </Providers>
+    <html lang="en" className="h-full antialiased">
+      <body className="flex h-full bg-zinc-50">
+        <div className="flex w-full">
+          <Layout>{children}</Layout>
+        </div>
       </body>
     </html>
   )

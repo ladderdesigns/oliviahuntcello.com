@@ -1,0 +1,17 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Send visitors on the default Netlify subdomain to the custom domain so search
+# engines only index one copy of the site. Deploy previews use other subdomains.
+[[redirects]]
+  from = "https://oliviahuntcello.netlify.app/*"
+  to = "https://oliviahuntcello.com/:splat"
+  status = 301
+  force = true

@@ -1,42 +1,91 @@
-# Spotlight
+# oliviahuntcello.com
 
-Spotlight is a [Tailwind UI](https://tailwindui.com) site template built using [Tailwind CSS](https://tailwindcss.com) and [Next.js](https://nextjs.org).
+The personal website of [Olivia Hunt](https://oliviahuntcello.com), a Los Angeles–based cellist and teacher. The site covers her biography and experience, private lessons, event bookings, a gallery of performance videos, and contact forms.
+
+Live site: **[oliviahuntcello.com](https://oliviahuntcello.com)**
+
+## Tech stack
+
+- [Next.js 16](https://nextjs.org) (App Router, Turbopack) with React 19
+- [Tailwind CSS 4](https://tailwindcss.com), configured in `src/styles/tailwind.css`
+- [Netlify](https://www.netlify.com) for hosting and [Netlify Forms](https://docs.netlify.com/forms/setup/) for inquiries
+
+The design is based on the [Spotlight](https://tailwindui.com/templates/spotlight) template from Tailwind UI.
 
 ## Getting started
 
-To get started with this template, first install the npm dependencies:
+Requires Node.js 20.19 or later (Netlify builds with Node 22, pinned in `.nvmrc` and `netlify.toml`).
 
 ```bash
 npm install
-```
-
-Next, create a `.env.local` file in the root of your project and set the `NEXT_PUBLIC_SITE_URL` variable to your site's public URL:
-
-```
-NEXT_PUBLIC_SITE_URL=https://example.com
-```
-
-Next, run the development server:
-
-```bash
+cp .env.example .env.local
 npm run dev
 ```
 
-Finally, open [http://localhost:3000](http://localhost:3000) in your browser to view the website.
+Then open [http://localhost:3000](http://localhost:3000).
 
-## Customizing
+| Script           | Description                        |
+| ---------------- | ---------------------------------- |
+| `npm run dev`    | Start the local development server |
+| `npm run build`  | Create a production build          |
+| `npm run start`  | Serve the production build locally |
+| `npm run lint`   | Run ESLint                         |
+| `npm run format` | Format the codebase with Prettier  |
 
-You can start editing this template by modifying the files in the `/src` folder. The site will auto-update as you edit these files.
+### Environment variables
+
+| Variable               | Description                                                                                                                   |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL` | Public URL of the site, used for canonical URLs, the sitemap, and social previews. Defaults to `https://oliviahuntcello.com`. |
+
+## Project structure
+
+```
+public/
+  __forms.html        Hidden form definitions that Netlify reads at deploy time
+src/
+  app/                Routes (home, about, lessons, booking, gallery, contact), plus
+                      robots.txt, sitemap.xml, and the social share image
+  components/         Shared UI, including the InquiryForm used by every form
+  images/             Portraits, photos, and organization logos
+  lib/                Site content and helpers (navigation, résumé, site URL)
+```
+
+## Common edits
+
+- **Biography:** `src/app/about/page.jsx` and the preview in `src/app/page.jsx`
+- **Orchestral and chamber experience:** `src/lib/resume.js` (an `end` of `null` shows as "Present")
+- **Gallery videos:** the `videos` array in `src/app/gallery/page.jsx` (use the YouTube video ID)
+- **Lesson testimonials:** the `testimonials` array in `src/app/lessons/page.jsx`
+- **Navigation:** `src/lib/navigation.js`, which feeds the header, footer, and sitemap. New pages also need `alternates.canonical` in their `metadata`.
+- **Social share image:** `src/app/opengraph-image.jpg` (1200×630) and its alt text in `opengraph-image.alt.txt`
+
+### Adding images
+
+Resize photos before committing them. Next.js serves optimized versions, but the originals are still downloaded by the optimizer and stored in git. Keep photos to about 1600px on the longest side and logos to about 112px square.
+
+## Forms
+
+The contact, lessons, and booking pages each render an `InquiryForm` (`src/components/InquiryForm.jsx`), which submits to Netlify Forms with `fetch` and then redirects to `/thank-you`.
+
+Netlify only discovers forms from static HTML, so every form and field must also be declared in `public/__forms.html`. If you add, rename, or remove a field, update both places. Otherwise Netlify silently drops that field from submissions.
+
+| Form name                 | Page       |
+| ------------------------- | ---------- |
+| `general-contact-inquiry` | `/contact` |
+| `private-lesson-inquiry`  | `/lessons` |
+| `private-booking-inquiry` | `/booking` |
+
+Submissions only reach Netlify on a deployed site. In local development, the form logs the submission to the browser console and goes straight to the thank-you page.
+
+Submissions and email notifications are managed in the Netlify dashboard under **Forms**.
+
+## Deployment
+
+The site deploys to Netlify automatically when changes are pushed to `main`. Build settings live in `netlify.toml`. The [Netlify Next.js runtime](https://docs.netlify.com/frameworks/next-js/overview/) (`@netlify/plugin-nextjs` v5) is installed as a dev dependency, so its version is controlled by `package.json` rather than the Netlify dashboard.
+
+To reproduce a Netlify build locally, run `npx netlify-cli build` after `netlify link`.
 
 ## License
 
-This site template is a commercial product and is licensed under the [Tailwind UI license](https://tailwindui.com/license).
-
-## Learn more
-
-To learn more about the technologies used in this site template, see the following resources:
-
-- [Tailwind CSS](https://tailwindcss.com/docs) - the official Tailwind CSS documentation
-- [Next.js](https://nextjs.org/docs) - the official Next.js documentation
-- [Headless UI](https://headlessui.dev) - the official Headless UI documentation
-- [MDX](https://mdxjs.com) - the MDX documentation
+The site is built on a commercial Tailwind UI template and is licensed under the [Tailwind UI license](https://tailwindui.com/license). See [LICENSE.md](LICENSE.md). Site content and images are © Olivia Hunt.

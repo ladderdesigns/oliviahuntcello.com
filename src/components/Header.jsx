@@ -1,15 +1,20 @@
 'use client'
 
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useTheme } from 'next-themes'
-import { Popover, Transition } from '@headlessui/react'
+import {
+  Popover,
+  PopoverBackdrop,
+  PopoverButton,
+  PopoverPanel,
+} from '@headlessui/react'
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
 import avatarImage from '@/images/avatar.jpg'
+import { navigation } from '@/lib/navigation'
 
 function CloseIcon(props) {
   return (
@@ -40,44 +45,12 @@ function ChevronDownIcon(props) {
   )
 }
 
-function SunIcon(props) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <path d="M8 12.25A4.25 4.25 0 0 1 12.25 8v0a4.25 4.25 0 0 1 4.25 4.25v0a4.25 4.25 0 0 1-4.25 4.25v0A4.25 4.25 0 0 1 8 12.25v0Z" />
-      <path
-        d="M12.25 3v1.5M21.5 12.25H20M18.791 18.791l-1.06-1.06M18.791 5.709l-1.06 1.06M12.25 20v1.5M4.5 12.25H3M6.77 6.77 5.709 5.709M6.77 17.73l-1.061 1.061"
-        fill="none"
-      />
-    </svg>
-  )
-}
-
-function MoonIcon(props) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path
-        d="M17.25 16.22a6.937 6.937 0 0 1-9.47-9.47 7.451 7.451 0 1 0 9.47 9.47ZM12.75 7C17 7 17 2.75 17 2.75S17 7 21.25 7C17 7 17 11.25 17 11.25S17 7 12.75 7Z"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
-
 function MobileNavItem({ href, children }) {
   return (
     <li>
-      <Popover.Button as={Link} href={href} className="block py-2">
+      <PopoverButton as={Link} href={href} className="block py-2">
         {children}
-      </Popover.Button>
+      </PopoverButton>
     </li>
   )
 }
@@ -85,59 +58,35 @@ function MobileNavItem({ href, children }) {
 function MobileNavigation(props) {
   return (
     <Popover {...props}>
-      <Popover.Button className="flex items-center px-4 py-2 text-sm font-medium rounded-full shadow-lg group bg-white/90 text-zinc-800 shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20">
+      <PopoverButton className="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm">
         Menu
-        <ChevronDownIcon className="w-2 h-auto ml-3 stroke-zinc-500 group-hover:stroke-zinc-700 dark:group-hover:stroke-zinc-400" />
-      </Popover.Button>
-      <Transition.Root>
-        <Transition.Child
-          as={Fragment}
-          enter="duration-150 ease-out"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="duration-150 ease-in"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <Popover.Overlay className="fixed inset-0 z-50 bg-zinc-800/40 backdrop-blur-sm dark:bg-black/80" />
-        </Transition.Child>
-        <Transition.Child
-          as={Fragment}
-          enter="duration-150 ease-out"
-          enterFrom="opacity-0 scale-95"
-          enterTo="opacity-100 scale-100"
-          leave="duration-150 ease-in"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
-        >
-          <Popover.Panel
-            focus
-            className="fixed z-50 p-8 origin-top bg-white inset-x-4 top-8 rounded-3xl ring-1 ring-zinc-900/5 dark:bg-zinc-900 dark:ring-zinc-800"
-          >
-            <div className="flex flex-row-reverse items-center justify-between">
-              <Popover.Button aria-label="Close menu" className="p-1 -m-1">
-                <CloseIcon className="w-6 h-6 text-zinc-500 dark:text-zinc-400" />
-              </Popover.Button>
-              <h2 className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
-                Navigation
-              </h2>
-            </div>
-            <nav className="mt-6">
-              <ul className="-my-2 text-base divide-y divide-zinc-100 text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
-                <MobileNavItem href="/about">About</MobileNavItem>
-                <MobileNavItem href="/lessons">Lessons</MobileNavItem>
-                <MobileNavItem href="/booking">Booking</MobileNavItem>
-
-
-                <MobileNavItem href="/gallery">Gallery</MobileNavItem>
-
-                {/* <MobileNavItem href="/writing">Writing</MobileNavItem> */}
-                <MobileNavItem href="/contact">Contact</MobileNavItem>
-              </ul>
-            </nav>
-          </Popover.Panel>
-        </Transition.Child>
-      </Transition.Root>
+        <ChevronDownIcon className="ml-3 h-auto w-2 stroke-zinc-500 group-hover:stroke-zinc-700" />
+      </PopoverButton>
+      <PopoverBackdrop
+        transition
+        className="fixed inset-0 z-50 bg-zinc-800/40 backdrop-blur-xs duration-150 data-closed:opacity-0 data-enter:ease-out data-leave:ease-in"
+      />
+      <PopoverPanel
+        focus
+        transition
+        className="fixed inset-x-4 top-8 z-50 origin-top rounded-3xl bg-white p-8 ring-1 ring-zinc-900/5 duration-150 data-closed:scale-95 data-closed:opacity-0 data-enter:ease-out data-leave:ease-in"
+      >
+        <div className="flex flex-row-reverse items-center justify-between">
+          <PopoverButton aria-label="Close menu" className="-m-1 p-1">
+            <CloseIcon className="h-6 w-6 text-zinc-500" />
+          </PopoverButton>
+          <h2 className="text-sm font-medium text-zinc-600">Navigation</h2>
+        </div>
+        <nav className="mt-6">
+          <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800">
+            {navigation.map((item) => (
+              <MobileNavItem key={item.href} href={item.href}>
+                {item.label}
+              </MobileNavItem>
+            ))}
+          </ul>
+        </nav>
+      </PopoverPanel>
     </Popover>
   )
 }
@@ -151,14 +100,12 @@ function NavItem({ href, children }) {
         href={href}
         className={clsx(
           'relative block px-3 py-2 transition',
-          isActive
-            ? 'text-green-500 dark:text-green-400'
-            : 'hover:text-green-500 dark:hover:text-green-400',
+          isActive ? 'text-green-700' : 'hover:text-green-700',
         )}
       >
         {children}
         {isActive && (
-          <span className="absolute h-px inset-x-1 -bottom-px bg-gradient-to-r from-green-500/0 via-green-500/40 to-green-500/0 dark:from-green-400/0 dark:via-green-400/40 dark:to-green-400/0" />
+          <span className="absolute inset-x-1 -bottom-px h-px bg-linear-to-r from-green-500/0 via-green-500/40 to-green-500/0" />
         )}
       </Link>
     </li>
@@ -168,36 +115,14 @@ function NavItem({ href, children }) {
 function DesktopNavigation(props) {
   return (
     <nav {...props}>
-      <ul className="flex px-3 text-sm font-medium rounded-full shadow-lg bg-white/90 text-zinc-800 shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
-        <NavItem href="/about">About</NavItem>
-        <NavItem href="/lessons">Lessons</NavItem>
-        <NavItem href="/booking">Booking</NavItem>
-        <NavItem href="/gallery">Gallery</NavItem>
-        <NavItem href="/contact">Contact</NavItem>
+      <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm">
+        {navigation.map((item) => (
+          <NavItem key={item.href} href={item.href}>
+            {item.label}
+          </NavItem>
+        ))}
       </ul>
     </nav>
-  )
-}
-
-function ThemeToggle() {
-  let { resolvedTheme, setTheme } = useTheme()
-  let otherTheme = resolvedTheme === 'dark' ? 'light' : 'dark'
-  let [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  return (
-    <button
-      type="button"
-      aria-label={mounted ? `Switch to ${otherTheme} theme` : 'Toggle theme'}
-      className="px-3 py-2 transition rounded-full shadow-lg group bg-white/90 shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
-      onClick={() => setTheme(otherTheme)}
-    >
-      <SunIcon className="h-6 w-6 fill-zinc-100 stroke-zinc-500 transition group-hover:fill-zinc-200 group-hover:stroke-zinc-700 dark:hidden [@media(prefers-color-scheme:dark)]:fill-green-50 [@media(prefers-color-scheme:dark)]:stroke-green-500 [@media(prefers-color-scheme:dark)]:group-hover:fill-green-50 [@media(prefers-color-scheme:dark)]:group-hover:stroke-green-600" />
-      <MoonIcon className="hidden h-6 w-6 fill-zinc-700 stroke-zinc-500 transition dark:block [@media(prefers-color-scheme:dark)]:group-hover:stroke-zinc-400 [@media_not_(prefers-color-scheme:dark)]:fill-green-400/10 [@media_not_(prefers-color-scheme:dark)]:stroke-green-500" />
-    </button>
   )
 }
 
@@ -212,7 +137,7 @@ function AvatarContainer({ className, ...props }) {
     <div
       className={clsx(
         className,
-        'h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10',
+        'h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm',
       )}
       {...props}
     />
@@ -232,7 +157,7 @@ function Avatar({ large = false, className, ...props }) {
         alt=""
         sizes={large ? '4rem' : '2.25rem'}
         className={clsx(
-          'rounded-full bg-zinc-100 object-cover dark:bg-zinc-800',
+          'rounded-full bg-zinc-100 object-cover',
           large ? 'h-16 w-16' : 'h-9 w-9',
         )}
         priority
@@ -351,7 +276,7 @@ export function Header() {
   return (
     <>
       <header
-        className="relative z-50 flex flex-col flex-none pointer-events-none"
+        className="pointer-events-none relative z-50 flex flex-none flex-col"
         style={{
           height: 'var(--header-height)',
           marginBottom: 'var(--header-mb)',
@@ -361,23 +286,23 @@ export function Header() {
           <>
             <div
               ref={avatarRef}
-              className="order-last mt-[calc(theme(spacing.16)-theme(spacing.3))]"
+              className="order-last mt-[calc(--spacing(16)-(--spacing(3)))]"
             />
             <Container
-              className="top-0 order-last pt-3 -mb-3"
+              className="top-0 order-last -mb-3 pt-3"
               style={{
                 position: 'var(--header-position)',
               }}
             >
               <div
-                className="top-[var(--avatar-top,theme(spacing.3))] w-full"
+                className="top-(--avatar-top,--spacing(3)) w-full"
                 style={{
                   position: 'var(--header-inner-position)',
                 }}
               >
                 <div className="relative">
                   <AvatarContainer
-                    className="absolute left-0 transition-opacity origin-left top-3"
+                    className="absolute top-3 left-0 origin-left transition-opacity"
                     style={{
                       opacity: 'var(--avatar-border-opacity, 0)',
                       transform: 'var(--avatar-border-transform)',
@@ -385,7 +310,7 @@ export function Header() {
                   />
                   <Avatar
                     large
-                    className="block w-16 h-16 origin-left"
+                    className="block h-16 w-16 origin-left"
                     style={{ transform: 'var(--avatar-image-transform)' }}
                   />
                 </div>
@@ -401,7 +326,7 @@ export function Header() {
           }}
         >
           <Container
-            className="top-[var(--header-top,theme(spacing.6))] w-full"
+            className="top-(--header-top,--spacing(6)) w-full"
             style={{
               position: 'var(--header-inner-position)',
             }}
@@ -414,15 +339,11 @@ export function Header() {
                   </AvatarContainer>
                 )}
               </div>
-              <div className="flex justify-end flex-1 md:justify-center">
+              <div className="flex flex-1 justify-end md:justify-center">
                 <MobileNavigation className="pointer-events-auto md:hidden" />
-                <DesktopNavigation className="hidden pointer-events-auto md:block" />
+                <DesktopNavigation className="pointer-events-auto hidden md:block" />
               </div>
-              <div className="flex justify-end md:flex-1">
-                <div className="pointer-events-auto">
-                  <ThemeToggle />
-                </div>
-              </div>
+              <div className="md:flex-1" />
             </div>
           </Container>
         </div>
